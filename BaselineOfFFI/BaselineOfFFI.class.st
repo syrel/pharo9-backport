@@ -5,7 +5,7 @@ Class {
 }
 
 { #category : #baselines }
-#BaselineOfFFI >> baseline: spec [
+BaselineOfFFI >> baseline: spec [
 	<baseline>
 	spec for: #'common' do: [
 		spec 
