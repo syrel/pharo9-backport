@@ -10,5 +10,6 @@ BaselineOfFFI >> baseline: spec [
 	spec for: #'common' do: [
 		spec 
 				package: 'FFI-Kernel';
-				package: 'FFI-Pools'. ]
+				package: 'FFI-OldFFIBackend';
+				package: 'FFI-Pools' ]
 ]
