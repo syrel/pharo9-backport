@@ -4,12 +4,6 @@ Class {
 	#category : #'Pharo-Patcher'
 }
 
-{ #category : #'instance creation' }
-PharoPatcher class >> haba [
-	| each realSuperClass |
-	
-]
-
 { #category : #patching }
 PharoPatcher class >> patch: aClass source: aSourceCode [
 	self patch: aClass source: aSourceCode classified: nil
@@ -27,7 +21,7 @@ PharoPatcher class >> patch: aClass source: aSourceCode classified: aCategory [
 		space;
 		space;
 		nextPutAll: aClass name;
-		nextPutAll: '' >> #'';
+		nextPutAll: ' >> #';
 		nextPutAll: aSelector;
 		cr
 ]
