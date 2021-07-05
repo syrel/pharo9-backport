@@ -88,6 +88,10 @@ PharoPatcher class >> updatePackages: aCollectionOfPackageNames during: aBlock [
 				nextPutAll: realSuperClass name;
 				cr ].
 
+	Behavior
+		initializeClassProperties;
+		initializeObsoleteSubclasses.
+
 	extensionMethods
 		do: [ :eachExtensionMethod | eachExtensionMethod compile ]
 ]
