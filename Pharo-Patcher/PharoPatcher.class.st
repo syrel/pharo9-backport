@@ -73,20 +73,33 @@ PharoPatcher class >> updatePackages: aCollectionOfPackageNames during: aBlock [
 		select: [ :each | each isTrait not and: [ each superclass notNil ] ])
 		select: [ :each | each superclass name beginsWith: 'AnObsolete' ]
 		thenDo: [ :each | 
-			| realSuperClass |
-			realSuperClass := self environment at: (each superclass name
-				copyReplaceAll: 'AnObsolete'
-				with: '') asSymbol.
-			each superclass: realSuperClass.
-			NonInteractiveTranscript stdout
-				space;
-				space;
-				space;
-				nextPutAll: 'Fixed the superclass of ';
-				nextPutAll: each name;
-				nextPutAll: ' to ';
-				nextPutAll: realSuperClass name;
-				cr ].
+			| anOriginalClassName |
+			
+			anOriginalClassName := (each superclass name
+					copyReplaceAll: 'AnObsolete'
+					with: '') asSymbol.
+			
+			self environment
+				at: anOriginalClassName
+				ifPresent: [ :realSuperClass |
+					each superclass: realSuperClass.
+					NonInteractiveTranscript stdout
+						space;
+						space;
+						space;
+						nextPutAll: 'Fixed the superclass of ';
+						nextPutAll: each name;
+						nextPutAll: ' to ';
+						nextPutAll: realSuperClass name;
+						cr ]
+				ifAbsent: [
+					NonInteractiveTranscript stdout
+						space;
+						space;
+						space;
+						nextPutAll: anOriginalClassName;
+						nextPutAll: ' no longer exists';
+						cr ] ].
 
 	Behavior
 		initializeClassProperties;
